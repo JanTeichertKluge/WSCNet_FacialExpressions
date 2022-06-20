@@ -1,2 +1,26 @@
 # WSCNet_EmotionDetector
- 
+Usage of opencv-python to detect human faces in frames, classification of faces with pytorch using WSCNet framework.
+
+WSCNet: Weakly Supervised Coupled Networks for Visual Sentiment Classification and Detection
+By Dongyu She, Jufeng Yang, Ming-Ming Cheng, Yu-Kun Lai, Paul L. Rosin and Liang Wang
+https://github.com/sherleens/WSCNet
+
+### Introduction
+
+We use the WSCNet framework for Visual Sentiment Classification and Detection to classify human facial expressions.
+
+
+
+### Requirements
+
+See requirements.txt
+
+### Dataset for training
+
+We used famous FER2013 dataset for trained the WSCNet to classify human facial expressions. The WSCNet was build on pretrained ResNet101.
+We achieved an accuracy of about 60% after 30 epochs.
+
+### Our trained models
+
+Find the state_dict of pretrained WSCNet on FER2013 on Google Drive:
+https://drive.google.com/file/d/1dhZHJNNaPr9mxIaYxyjeTMkFZJ5RUkiu/view?usp=sharing
