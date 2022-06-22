@@ -35,7 +35,7 @@ https://drive.google.com/drive/folders/1FABmh9eX2d4b_NLbHe5Hlbyem_7_ydYQ?usp=sha
 
 ### Scripts
 
-Use the Scripts in Google Colab with GPU Acceleration. 
+Use the Notebook in Google Colab with GPU Acceleration. 
 Please keep in mind that the paths to the pre-trained model must be customized.
 The model does not necessarily have to be loaded via Google Drive, 
 it can also be uploaded directly in the ./content path at Google Colab.
