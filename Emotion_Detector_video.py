@@ -68,7 +68,7 @@ def main():
 
                 if ttens is not None:
 
-                    tensor, dec_tens = model(ttens[None]) # Prediction der Gesichter im WSCNet
+                    dec_tensor, tensor = model(ttens[None]) # Prediction der Gesichter im WSCNet
                     pred = torch.max(tensor, dim=1)[1].tolist()
                     label = class_labels[pred[0]]
                     label_position = (x, y)
