@@ -1,9 +1,15 @@
 # WSCNet_EmotionDetector
-Usage of opencv-python to detect human faces in frames, classification of faces with pytorch using WSCNet framework.
+Usage of OpenCV to detect human faces in frames, classification of faces with pytorch using WSCNet framework.
+
+OpenCV: The Open Source Computer Vision Library is an open source computer vision and machine learning software library.
+https://opencv.org/
+https://pypi.org/project/opencv-python/
 
 WSCNet: Weakly Supervised Coupled Networks for Visual Sentiment Classification and Detection
 By Dongyu She, Jufeng Yang, Ming-Ming Cheng, Yu-Kun Lai, Paul L. Rosin and Liang Wang
 https://github.com/sherleens/WSCNet
+
+This project was created by Moritz Sundermann and Jan Teichert-Kluge as part of a seminar paper at the University of Hamburg.
 
 ### Introduction
 
