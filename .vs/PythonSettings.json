@@ -1,3 +1,4 @@
 {
-  "Interpreter": "Global|VisualStudio|inference_env"
+  "Interpreter": "Global|VisualStudio|inference_env",
+  "SuppressPackageInstallationPrompt": true
 }
