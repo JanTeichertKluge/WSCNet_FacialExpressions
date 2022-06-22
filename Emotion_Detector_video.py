@@ -24,7 +24,8 @@ face_classifier = cv2.CascadeClassifier("./haarcascade_frontalface_default.xml")
 # Laden der Klassen des Neural Networks
 from WSCNet_Classes import *
 class_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
-model = torch.load(r'C:\Users\Nutzer\Documents\SeminarArbeit\Emotion_Detector\Emotion_Detector\wscnet_full_50runs_120622.pt',map_location=torch.device('cpu'))
+net_path = r"C:\Users\Nutzer\Desktop\WSCNet_Predictor_final\wscnet_softmax_added_20epochs_full.pt"
+model = torch.load(net_path, map_location=torch.device('cpu'))
 model.eval()
 
 # Disable Gradient
