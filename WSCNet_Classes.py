@@ -83,25 +83,28 @@ class ResNetWSL(nn.Module):
         # detect branch
         x = self.downconv(x) 
         x_conv = x
-        x = self.GMP(x)  #x = self.GMP(x) Geändert zu MaxPooling
+        x = self.GMP(x)  # cross-spatial pooling
         x = self.spatial_pooling(x) 
         x = x.view(x.size(0), -1)
-        x = self.softmax(x)
+        x = self.softmax(x) #Aktivierung
 
         # classification branch
         x_conv = self.spatial_pooling(x_conv) 
         x_conv = x_conv * x.view(x.size(0),x.size(1),1,1) #Coupling
         x_conv = self.spatial_pooling2(x_conv) 
         x_conv_copy = x_conv
+
+        #Concatenation / Verkettung
         for num in range(0,2047):            
-            x_conv_copy = torch.cat((x_conv_copy, x_conv),1) 
+            x_conv_copy = torch.cat((x_conv_copy, x_conv),1)
         x_conv_copy = torch.mul(x_conv_copy,x_ori)
         x_conv_copy = torch.cat((x_ori,x_conv_copy),1) 
-        x_conv_copy = self.GAP(x_conv_copy)
+
+        x_conv_copy = self.GAP(x_conv_copy) #Semantic Vector 
         x_conv_copy = x_conv_copy.view(x_conv_copy.size(0),-1)
-        x_conv_copy = self.classifier(x_conv_copy)
-        x_conv_copy = self.softmax(x_conv_copy)
-        return x, x_conv_copy
+        x_conv_copy = self.classifier(x_conv_copy) # Lin Layer
+        x_conv_copy = self.softmax(x_conv_copy) # LogSoftmax
+        return x, x_conv_copy #returnt outputs des detection- und classification branches
 
 
 

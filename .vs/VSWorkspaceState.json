@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Scripts"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\Scripts\\WSCNet_Training_final.ipynb",
   "PreviewInSolutionExplorer": false
 }
