@@ -9,6 +9,8 @@ import torch.nn.functional as F
 import torchvision.transforms as tt
 import warnings
 from torchvision.transforms.transforms import ToPILImage
+from datetime import datetime
+
 #warnings.filterwarnings("ignore")
 
 # Startup des Programms
@@ -44,6 +46,23 @@ data_transforms = transforms.Compose([
 
 cam = cv2.VideoCapture(0)
 
+def show_imgtens(imgtens):
+    temp = None
+    try:
+        plt.close()
+        if torch.is_tensor(imgtens):
+            temp = imgtens[0]
+        elif isinstance(imgtens, (np.ndarray)):
+            temp = imgtens
+        else: 
+            print("TypeError, data must be tensor or np.array: ", TypeError)
+
+    finally:
+        if temp is not None:
+            plt.imshow(transforms.ToPILImage()(temp), interpolation="bicubic")
+            timestmp = datetime.now().strftime("%H_%M_%S")
+            plt.savefig('exampleimg_{t}'.format(t=timestmp))
+        return None
 
 def main():
     with torch.no_grad():
@@ -73,7 +92,7 @@ def main():
 
                     if ttens is not None:
 
-                        tensor, dec_tens = model(ttens[None]) # Prediction der Gesichter im WSCNet
+                        dec_tensor, tensor = model(ttens[None]) # Prediction der Gesichter im WSCNet
                         pred = torch.max(tensor, dim=1)[1].tolist()
                         label = class_labels[pred[0]]
                         label_position = (x, y)
