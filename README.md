@@ -8,6 +8,9 @@ https://github.com/sherleens/WSCNet
 ### Introduction
 
 We use the WSCNet framework for Visual Sentiment Classification and Detection to classify human facial expressions.
+We changed the following according to the original WSCNet-Script file: 
+  1) Changed Global Average Pooling to Global Max Pooling in Detection Branch
+  2) Added LogSoftmax activation function to Detections- and Classifications Branch Outputs
 
 
 
