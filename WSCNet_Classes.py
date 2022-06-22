@@ -31,9 +31,28 @@ import matplotlib.pyplot as plt
 import time
 import os
 import copy
+from datetime import datetime
 
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
+
+def show_imgtens(imgtens):
+    temp = None
+    try:
+        plt.close()
+        if torch.is_tensor(imgtens):
+            temp = imgtens[0]
+        elif isinstance(imgtens, (np.ndarray)):
+            temp = imgtens
+        else: 
+            print("TypeError, data must be tensor or np.array: ", TypeError)
+
+    finally:
+        if temp is not None:
+            plt.imshow(transforms.ToPILImage()(temp), interpolation="bicubic")
+            timestmp = datetime.now().strftime("%H_%M_%S")
+            plt.savefig('exampleimg_{t}'.format(t=timestmp))
+        return None
 
 
 class ResNetWSL(nn.Module):
@@ -53,19 +72,23 @@ class ResNetWSL(nn.Module):
         self.classifier = nn.Sequential(
             nn.Linear(4096, num_classes)
             )
+        self.softmax = torch.nn.LogSoftmax(dim=1)
 
     def forward(self, x):
         x = self.features(x)
-        x_ori = x  #plt.imshow(transforms.ToPILImage()(x[0]), interpolation="bicubic")  
+        x_ori = x  
+
         # detect branch
         x = self.downconv(x) 
         x_conv = x              
-        x = self.GAP(x)  #x = self.GMP(x)       
+        x = self.GMP(x)  #x = self.GMP(x) Geändert zu MaxPooling
         x = self.spatial_pooling(x) 
         x = x.view(x.size(0), -1)
-        # cls branch
+        x = self.softmax(x)
+
+        # classification branch
         x_conv = self.spatial_pooling(x_conv) 
-        x_conv = x_conv * x.view(x.size(0),x.size(1),1,1) 
+        x_conv = x_conv * x.view(x.size(0),x.size(1),1,1) #Coupling
         x_conv = self.spatial_pooling2(x_conv) 
         x_conv_copy = x_conv
         for num in range(0,2047):            
@@ -75,6 +98,7 @@ class ResNetWSL(nn.Module):
         x_conv_copy = self.GAP(x_conv_copy)
         x_conv_copy = x_conv_copy.view(x_conv_copy.size(0),-1)
         x_conv_copy = self.classifier(x_conv_copy)
+        x_conv_copy = self.softmax(x_conv_copy)
         return x, x_conv_copy
 
 
