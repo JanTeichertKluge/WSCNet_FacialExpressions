@@ -36,6 +36,8 @@ from datetime import datetime
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
+img_save_path = r"C:\Users\Nutzer\Desktop\WSCNet_Predictor_final/"
+
 def show_imgtens(imgtens):
     temp = None
     try:
@@ -51,7 +53,7 @@ def show_imgtens(imgtens):
         if temp is not None:
             plt.imshow(transforms.ToPILImage()(temp), interpolation="bicubic")
             timestmp = datetime.now().strftime("%H_%M_%S")
-            plt.savefig('exampleimg_{t}'.format(t=timestmp))
+            plt.savefig(img_save_path + 'exampleimg_{t}'.format(t=timestmp))
         return None
 
 
@@ -80,7 +82,7 @@ class ResNetWSL(nn.Module):
 
         # detect branch
         x = self.downconv(x) 
-        x_conv = x              
+        x_conv = x
         x = self.GMP(x)  #x = self.GMP(x) Geändert zu MaxPooling
         x = self.spatial_pooling(x) 
         x = x.view(x.size(0), -1)

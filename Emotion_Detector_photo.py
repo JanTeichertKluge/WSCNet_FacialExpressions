@@ -26,8 +26,9 @@ face_classifier = cv2.CascadeClassifier("./haarcascade_frontalface_default.xml")
 # Laden der Klassen des Neural Networks
 from WSCNet_Classes import *
 net_path = r"C:\Users\Nutzer\Desktop\WSCNet_Predictor_final\wscnet_softmax_added_20epochs_full.pt"
+img_save_path = r"C:\Users\Nutzer\Desktop\WSCNet_Predictor_final/"
 class_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
-model = torch.load(net_path,map_location=torch.device('cpu'))
+model = torch.load(net_path, map_location=torch.device('cpu'))
 model.eval()
 
 # Disable Gradient
@@ -62,7 +63,7 @@ def show_imgtens(imgtens):
         if temp is not None:
             plt.imshow(transforms.ToPILImage()(temp), interpolation="bicubic")
             timestmp = datetime.now().strftime("%H_%M_%S")
-            plt.savefig('exampleimg_{t}'.format(t=timestmp))
+            plt.savefig(img_save_path + 'exampleimg_{t}'.format(t=timestmp))
         return None
 
 def main():
