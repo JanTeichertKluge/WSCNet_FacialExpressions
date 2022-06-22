@@ -66,19 +66,17 @@ def show_imgtens(imgtens):
 
 def main():
     with torch.no_grad():
-        cv2.namedWindow("test")
+        cv2.namedWindow("Emotion_Detector")
         img_counter = 0
         while True:
             ret, frame = cam.read()
             if not ret:
-                print("failed to grab frame")
+                print("Error: No Image on cap!")
                 break
-            cv2.imshow("test", frame)
+            cv2.imshow("Emotion_Detector", frame)
 
             k = cv2.waitKey(1)
             if k%256 == 27:
-                # ESC pressed
-                print("Escape hit, closing...")
                 break
             elif k%256 == 32:
                 extracted_frame = cv2.flip(frame, 1)
