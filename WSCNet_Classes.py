@@ -83,7 +83,7 @@ class ResNetWSL(nn.Module):
         # detect branch
         x = self.downconv(x) 
         x_conv = x
-        x = self.GMP(x)  # cross-spatial pooling
+        x = self.GMP(x)  # self.GAP(x) cross-spatial pooling
         x = self.spatial_pooling(x) 
         x = x.view(x.size(0), -1)
         x = self.softmax(x) #Aktivierung

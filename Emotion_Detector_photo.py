@@ -93,7 +93,7 @@ def main():
                     if ttens is not None:
 
                         dec_tensor, tensor = model(ttens[None]) # Prediction der Gesichter im WSCNet
-                        pred = torch.max(tensor, dim=1)[1].tolist()
+                        pred = torch.max(torch.exp(tensor), dim=1)[1].tolist()
                         label = class_labels[pred[0]]
                         label_position = (x, y)
                         cv2.putText(extracted_frame, label, label_position, cv2.FONT_HERSHEY_DUPLEX, 1,  (255, 255, 255), 2)              
