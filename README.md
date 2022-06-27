@@ -26,7 +26,7 @@ See requirements.txt
 ### Dataset for training
 
 We used FER2013 dataset for train the WSCNet to classify human facial expressions. The WSCNet was build on pretrained ResNet101.
-We achieved an accuracy of about 59% after 20 epochs.
+We achieved an accuracy of about 56% after 20 epochs.
 
 ### Our trained models
 
